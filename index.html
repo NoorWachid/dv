@@ -83,9 +83,21 @@
 
             if (!(event.altKey || event.ctrlKey || event.metaKey) && map[event.keyCode]) {
                 event.preventDefault();
-                editor.value += event.shiftKey ? map[event.keyCode][1] : map[event.keyCode][0];
+                insertNewText(event.shiftKey ? map[event.keyCode][1] : map[event.keyCode][0]);
             }
         });
+
+        function insertNewText(newText) {
+            const start = editor.selectionStart
+            const end = editor.selectionEnd
+            const text = editor.value
+            const before = text.substring(0, start)
+            const after  = text.substring(end, text.length)
+            editor.value = (before + newText + after)
+            editor.selectionStart = editor.selectionEnd = start + newText.length
+            editor.focus()
+        }
+
     </script>
 </body>
 </html>
