@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dv: Write Dvorak on Qwerty Layout</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        #editor,
+        #editor:hover,
+        #editor:focus,
+        #editor:active {
+            font-family: monospace;
+            font-size: 12px;
+            border: 0px solid transparent;
+            outline: 0px;
+        }
+        #editor {
+            padding: 8px 12px;
+            width: 100%;
+            height: 100vh;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <textarea tabindex="-1" id="editor"></textarea>
+    <script>
+        var editor = document.getElementById('editor');
+        var map = {
+            '9': ['\t', '\t'],
+            '189': ['[', '{'],
+            '187': [']', '}'],
+            
+            '81': ['\'', '"'],
+            '87': [',', '<'],
+            '69': ['.', '>'],
+            '82': ['p', 'P'],
+            '84': ['y', 'Y'],
+            '89': ['f', 'F'],
+            '85': ['g', 'G'],
+            '73': ['c', 'C'],
+            '79': ['r', 'R'],
+            '80': ['l', 'L'],
+            '219': ['/', '?'],
+            '221': ['=', '+'],
+
+            '65': ['a', 'A'],
+            '83': ['o', 'O'],
+            '68': ['e', 'E'],
+            '70': ['u', 'U'],
+            '71': ['i', 'I'],
+            '72': ['d', 'D'],
+            '74': ['h', 'H'],
+            '75': ['t', 'T'],
+            '76': ['n', 'N'],
+            '186': ['s', 'S'],
+            '222': ['-', '_'],
+
+            '90': [';', ':'],
+            '88': ['q', 'Q'],
+            '67': ['j', 'J'],
+            '86': ['k', 'K'],
+            '66': ['x', 'X'],
+            '78': ['b', 'B'],
+            '77': ['m', 'M'],
+            '188': ['w', 'W'],
+            '190': ['v', 'Z'],
+            '90': ['z', 'Z'] 
+        };
+
+        editor.addEventListener('keydown', function (event) {
+
+            if (!(event.altKey || event.ctrlKey || event.metaKey) && map[event.keyCode]) {
+                event.preventDefault();
+                editor.value += event.shiftKey ? map[event.keyCode][1] : map[event.keyCode][0];
+            }
+        });
+    </script>
+</body>
+</html>
