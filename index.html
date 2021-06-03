@@ -38,59 +38,90 @@
     <script>
         var editor = document.getElementById('editor');
         var map = {
-            '9': ['\t', '\t'],
-            '189': ['[', '{'],
-            '187': [']', '}'],
-            
-            '81': ['\'', '"'],
-            '87': [',', '<'],
-            '69': ['.', '>'],
-            '82': ['p', 'P'],
-            '84': ['y', 'Y'],
-            '89': ['f', 'F'],
-            '85': ['g', 'G'],
-            '73': ['c', 'C'],
-            '79': ['r', 'R'],
-            '80': ['l', 'L'],
-            '219': ['/', '?'],
-            '221': ['=', '+'],
+            'Tab': '\t',
+	    // Upper
+	    'q': "'",
+	    'w': ',',
+	    'e': '.',
+	    'r': 'p',
+	    't': 'y',
+	    'y': 'f',
+	    'u': 'g',
+	    'i': 'c',
+	    'o': 'r',
+	    'p': 'l',
+	    '[': '/',
+	    ']': '=',
+	    // Upper + Shift
+	    'Q': '"',
+	    'W': '<',
+	    'E': '>',
+	    'R': 'P',
+	    'T': 'Y',
+	    'Y': 'F',
+	    'U': 'G',
+	    'I': 'C',
+	    'O': 'R',
+	    'P': 'L',
+	    '[': '?',
+	    ']': '+',
 
-            '65': ['a', 'A'],
-            '83': ['o', 'O'],
-            '68': ['e', 'E'],
-            '70': ['u', 'U'],
-            '71': ['i', 'I'],
-            '72': ['d', 'D'],
-            '74': ['h', 'H'],
-            '75': ['t', 'T'],
-            '76': ['n', 'N'],
-            '186': ['s', 'S'],
-            '222': ['-', '_'],
-
-            '90': [';', ':'],
-            '88': ['q', 'Q'],
-            '67': ['j', 'J'],
-            '86': ['k', 'K'],
-            '66': ['x', 'X'],
-            '78': ['b', 'B'],
-            '77': ['m', 'M'],
-            '188': ['w', 'W'],
-            '190': ['v', 'Z'],
-            '90': ['z', 'Z'] 
+	    // Middle
+	    's': 'o',
+	    'd': 'e',
+	    'f': 'u',
+	    'g': 'i',
+	    'h': 'd',
+	    'j': 'h',
+	    'k': 't',
+	    'l': 'n',
+	    ';': 's',
+	    "'": '-',
+	    // Middle + Shift
+	    'S': 'O',
+	    'D': 'E',
+	    'F': 'U',
+	    'G': 'I',
+	    'H': 'D',
+	    'J': 'H',
+	    'K': 'T',
+	    'L': 'N',
+	    ':': 'S',
+	    '"': '-',
+	
+	    // Lower
+	    'z': ';',
+	    'x': 'q',
+	    'c': 'j',
+	    'v': 'k',
+	    'b': 'x',
+	    'n': 'b',
+	    ',': 'w',
+	    '.': 'v',
+	    '/': 'z',
+	    // Lower + Shift
+	    'Z': ':',
+	    'X': 'Q',
+	    'C': 'J',
+	    'V': 'K',
+	    'B': 'X',
+	    'N': 'B',
+	    '<': 'W',
+	    '>': 'V',
+	    '?': 'Z',
         };
 
         editor.addEventListener('keydown', function (event) {
-
-            if (!(event.altKey || event.ctrlKey || event.metaKey) && map[event.keyCode]) {
+            if (!(event.altKey || event.ctrlKey || event.metaKey) && map[event.key]) {
                 event.preventDefault();
-                insertNewText(event.shiftKey ? map[event.keyCode][1] : map[event.keyCode][0]);
+                insertNewText(map[event.key]);
             }
         });
 
         function insertNewText(newText) {
-            const start = editor.selectionStart
-            const end = editor.selectionEnd
-            const text = editor.value
+            const start  = editor.selectionStart
+            const end    = editor.selectionEnd
+            const text   = editor.value
             const before = text.substring(0, start)
             const after  = text.substring(end, text.length)
             editor.value = (before + newText + after)
